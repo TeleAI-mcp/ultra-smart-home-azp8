@@ -1,2 +1,3 @@
-# ultra-smart-home-azp8
+# Ultra Smart Home Azp8
+
 A repository to test GitHub automation for issue management.
