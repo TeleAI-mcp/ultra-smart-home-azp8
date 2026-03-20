@@ -1,0 +1,26 @@
+name: Close Completed Issues
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  close-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close issue if labeled completed
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.issue;
+            const label = context.payload.label.name;
+            
+            if (label === 'completed') {
+              github.rest.issues.update({
+                owner: issue.owner,
+                repo: issue.repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+              console.log(`Issue #${issue.number} has been closed due to label: ${label}`);
+            }
